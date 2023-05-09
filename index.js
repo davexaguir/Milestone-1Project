@@ -49,28 +49,6 @@ class Player {
     }
 } 
 
-// create projectiles
-class projectile {
-    constructor({position, velocity}){
-        this.position = position 
-        this.velocity = velocity
-
-        this.radius = 3
-    }
-    draw(){
-        canv.beginPath()
-        canv.arc(this.position.x, this.position.y, this.radius, 0, Math.PI *2)
-        canv.fillStyle = 'yellow'
-        canv.fill()
-        canv.closePath()
-    }
-    update() {
-        this.draw()
-        this.position.x += this.velocity.x
-        this.position.y += this.velocity.y
-    }
-}
-
 // create invader 
 
 class Invader {
@@ -115,6 +93,31 @@ class Invader {
     }
 } 
 
+
+// create projectiles
+class projectile {
+    constructor({position, velocity}){
+        this.position = position 
+        this.velocity = velocity
+
+        this.radius = 3
+    }
+    draw(){
+        canv.beginPath()
+        canv.arc(this.position.x, this.position.y, this.radius, 0, Math.PI *2)
+        canv.fillStyle = 'yellow'
+        canv.fill()
+        canv.closePath()
+    }
+    update() {
+        this.draw()
+        this.position.x += this.velocity.x
+        this.position.y += this.velocity.y
+    }
+}
+
+
+
  class enemyGrid {
   constructor(){
     this.position = { 
@@ -129,11 +132,11 @@ class Invader {
 
     this.width = 10 * 30
 
-    for(let i = 0; i < 10; i++) {
+    for(let z = 0; z < 10; z++) {
         for(let y = 0; y < 8; y++) {
         this.invaders.push(new Invader({
             position: {
-                x: i * 30,
+                x: z * 30,
                 y: y * 30
             }
         })
@@ -186,8 +189,27 @@ function animate(){
 
     enemyGrids.forEach(enemyGrid => {
         enemyGrid.update()
-        enemyGrid.invaders.forEach((Invader) => {
+        enemyGrid.invaders.forEach((Invader, i) => {
             Invader.update({velocity: enemyGrid.velocity})
+
+            projectiles.forEach((projectile, p) => {
+               if(projectile.position.y - projectile.radius <= Invader.position.y + Invader.height && 
+                projectile.position.x + projectile.radius >= Invader.position.x && 
+                projectile.position.x - projectile.radius <= Invader.position.x  + Invader.width &&
+                projectile.position.y + projectile.radius >= Invader.position.y){
+               
+                    setTimeout(() => {
+                        const invaderHit = enemyGrid.invaders.find((invaderH) => 
+                        invaderH === Invader
+                        )
+                        const projectileHit = projectiles.find((projectileH) => projectileH === projectile)
+                    if(invaderHit && projectileHit){  
+                    enemyGrid.invaders.splice(i, 1)
+                    projectiles.splice(p, 1)
+                    }
+                }, 0)
+               } 
+            })
         })
     })
 
