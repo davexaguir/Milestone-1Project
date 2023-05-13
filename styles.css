@@ -1,4 +1,79 @@
-canvas {
+:root {
+    --clr-game-orange: #e4dcdc;
+  }
+  * {
+    margin: 0;
+    padding: 0;
+    background-color: #202224;
+    color: rgb(213, 16, 213);
+  }
+  
+  body {
+    font-size: 16px;
+  }
+  
+  .container {
+    display: grid;
+    margin: 0 auto;
+    width: 300px;
+  }
+  
+  .container h3 {
+    padding-top: 0.25rem;
+  }
+  
+  .grid {
+    display: flex;
+    flex-wrap: wrap;
+    border: solid 1px;
+    width: 300px;
+    height: 300px;
+  }
+  
+  .grid div {
+    width: 20px;
+    height: 20px;
+  }
+  
+  .shooter {
+    background-color: blue;
+  }
+  
+  .invader {
+    background-color: green;
+    border-radius: 50%;
+  }
+  
+  .boom {
+    background-color: pink;
+  }
+  
+  .laser {
+    background-color: var(--clr-game-orange);
+  }
+  
+  /* ****** touch controls ****** */
+  .ctrls {
+    display: flex;
+    justify-content: space-around;
+    width: 300px;
+    padding-top: 1rem;
+    height: 2rem;
+  }
+  
+  #fireBtn {
+    width: 50%;
+  }
+  
+  #leftBtn {
+    width: 20%;
+  }
+  
+  #rightBtn {
+    width: 20%;
+  }
+  
+/* canvas {
     padding-left: 0;
     padding-right: 0;
     margin-left: auto;
@@ -6,8 +81,14 @@ canvas {
     display: block;
     width: 700px;
     box-shadow: black 20px 10px 50px;
+
 }
 
 body{
     margin: 0;
 }
+
+h1{
+    font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+    color: blueviolet;
+} */
